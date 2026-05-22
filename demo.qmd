@@ -1,0 +1,71 @@
+---
+title: "Passage Cross-References Demo"
+author: "Jiangyang Zhang"
+date: today
+format:
+  html:
+    theme: cosmo
+    # Use `quarto render demo.qmd` to generate demo.html
+    # Add `embed-resources: true` above for a self-contained HTML file
+filters:
+  - passage-xref
+---
+
+## Inline Passage Targets
+
+Wrap any inline text with `.passage` and an ID starting with `pas-`:
+
+```markdown
+[the square of the hypotenuse...]{.passage #pas-pythagoras}
+```
+
+This chapter demonstrates all theorem-like types: [theorems, lemmas, corollaries, propositions, conjectures]{.passage #pas-theorem-types}.
+
+The fundamental result states that [the square of the hypotenuse of a right triangle equals the sum of the squares of the other two sides]{.passage #pas-pythagoras}.
+
+In number theory, [every even integer greater than 2 can be expressed as the sum of two primes]{.passage #pas-goldbach}, a claim that remains unproven since 1742.
+
+[The derivative of a function at a point is the limit of the difference quotient as the increment approaches zero]{.passage #pas-derivative}.
+
+## Cross-References
+
+Use `.pref` with the `pas` attribute to reference a passage:
+
+```markdown
+See [Passage]{.pref pas="pas-pythagoras"}.
+```
+
+- [Passage]{.pref pas="pas-theorem-types"} lists the main theorem-like types.
+- [Passage]{.pref pas="pas-pythagoras"} is the classical result.
+- [Passage]{.pref pas="pas-goldbach"} is a famous unsolved conjecture.
+- [Passage]{.pref pas="pas-derivative"} captures the intuition behind calculus.
+
+## Reference Options
+
+| Option | Syntax | Output |
+|--------|--------|--------|
+| Default prefix | `[Passage]{.pref pas="pas-xxx"}` | "Passage N" |
+| Custom prefix | `[Passage]{.pref pas="pas-xxx" prefix="Stmt"}` | "Stmt N" |
+| No prefix | `[Passage]{.pref pas="pas-xxx" noprefix="true"}` | "N" |
+
+Examples targeting the Pythagorean theorem:
+
+- Default: [Passage]{.pref pas="pas-pythagoras"}
+- Custom prefix: [Passage]{.pref pas="pas-pythagoras" prefix="Stmt"}
+- No prefix: [Passage]{.pref pas="pas-pythagoras" noprefix="true"}
+
+## Forward References
+
+References can appear before their targets. The filter uses a two-pass design:
+
+[Passage]{.pref pas="pas-forward-demo"} is defined below.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+[This passage was referenced before it was defined]{.passage #pas-forward-demo}.
+
+## Broken References
+
+Unresolved references display a warning:
+
+[Passage]{.pref pas="pas-nonexistent"} should show an error indicator.
