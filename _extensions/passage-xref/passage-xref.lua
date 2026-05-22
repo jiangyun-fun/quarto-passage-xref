@@ -79,21 +79,11 @@ function Pandoc(doc)
     end })
   end
 
-  return doc
-end
-
--- Inject CSS + tippy.js hover preview JS (HTML output only)
-function Meta(meta)
-  -- Skip if no passage elements in this document
-  if not has_passages then return meta end
-
-  -- Only inject for HTML output formats
-  local format = FORMAT:match("[^%+]+")
-  if format ~= "html" and format ~= "html4" and format ~= "html5" then
-    return meta
-  end
-
-  local css = pandoc.RawInline("html", [[
+  -- Inject CSS + JS into metadata (HTML only, only when passages exist)
+  if has_passages then
+    local format = FORMAT:match("[^%+]+")
+    if format == "html" or format == "html4" or format == "html5" then
+      local css = pandoc.RawInline("html", [[
 <style>
 .passage-marker {
   color: #6c757d;
@@ -122,16 +112,14 @@ function Meta(meta)
 }
 </style>
 ]])
-
-  local js = pandoc.RawInline("html", [[
+      local js = pandoc.RawInline("html", [[
 <script>
 (function() {
   function setupPassageXrefs() {
     if (typeof window.tippy === "undefined") return;
     document.querySelectorAll("a.passage-xref").forEach(function(xref) {
-      if (xref._tippy) return; // already initialized
+      if (xref._tippy) return;
       var url = xref.getAttribute("href");
-      // Quarto's nav script rewrites hrefs to full URLs; extract hash fragment
       var hash;
       if (url && url.indexOf("#") === 0) {
         hash = url;
@@ -161,11 +149,9 @@ function Meta(meta)
       });
     });
   }
-
   function deferSetup() {
     setTimeout(setupPassageXrefs, 0);
   }
-
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", deferSetup);
   } else {
@@ -175,16 +161,15 @@ function Meta(meta)
 </script>
 ]])
 
-  if not meta["header-includes"] then
-    meta["header-includes"] = pandoc.MetaList({})
+      if not doc.meta["header-includes"] then
+        doc.meta["header-includes"] = pandoc.MetaList({})
+      end
+      table.insert(doc.meta["header-includes"], css)
+      table.insert(doc.meta["header-includes"], js)
+    end
   end
-  table.insert(meta["header-includes"], css)
-  table.insert(meta["header-includes"], js)
 
-  return meta
+  return doc
 end
 
-return {
-  Pandoc = Pandoc,
-  Meta = Meta,
-}
+return { Pandoc = Pandoc }
