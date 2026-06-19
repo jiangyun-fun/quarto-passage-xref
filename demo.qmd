@@ -5,8 +5,9 @@ date: today
 format:
   html:
     theme: cosmo
-    # Use `quarto render demo.qmd` to generate demo.html
-    # Add `embed-resources: true` above for a self-contained HTML file
+    embed-resources: true
+    # `quarto render demo.qmd` produces a self-contained demo.html
+    # (all CSS/JS inlined as data URIs, no external dependencies).
 filters:
   - passage-xref
 ---
