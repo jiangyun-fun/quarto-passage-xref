@@ -2,6 +2,8 @@
 
 A [Quarto](https://quarto.org) extension that adds cross-references for arbitrary inline text passages — something Quarto's native cross-reference system doesn't support.
 
+**Live demo:** <https://jiangyun-fun.github.io/quarto-passage-xref/>
+
 ## Overview
 
 Quarto provides built-in cross-references for figures, tables, equations, theorems, and other floating environments. However, you can't cross-reference an arbitrary span of inline text. This extension fills that gap.
@@ -9,7 +11,7 @@ Quarto provides built-in cross-references for figures, tables, equations, theore
 ## Installation
 
 ```bash
-quarto add jiangyangzx/quarto-passage-xref
+quarto add jiangyun-fun/quarto-passage-xref
 ```
 
 ## Usage

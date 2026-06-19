@@ -1,6 +1,6 @@
 ---
 title: "Passage Cross-References Demo"
-author: "Jiangyang Zhang"
+author: "Yun Jiang"
 date: today
 format:
   html:

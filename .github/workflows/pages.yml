@@ -1,0 +1,51 @@
+name: Deploy demo to GitHub Pages
+
+# Publishes the self-contained demo.html as the Pages site root so the
+# extension has a live, always-up-to-date preview at:
+#   https://jiangyun-fun.github.io/quarto-passage-xref/
+# Only demo.html is published; the rest of the repo stays off the web.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'demo.html'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent Pages deployment, cancelling runs in progress.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Stage demo as the site index
+        run: |
+          mkdir -p _site
+          cp demo.html _site/index.html
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
