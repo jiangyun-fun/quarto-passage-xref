@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jiangyang Zhang">
-<meta name="dcterms.date" content="2026-05-22">
+<meta name="dcterms.date" content="2026-06-19">
 
 <title>Passage Cross-References Demo</title>
 <style>
@@ -174,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 22, 2026</p>
+      <p class="date">June 19, 2026</p>
     </div>
   </div>
   
@@ -252,6 +252,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="#pas-forward-demo" class="passage-xref">Passage 5</a> is defined below.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 <p><span id="pas-forward-demo" class="passage">This passage was referenced before it was defined<span class="passage-marker"> {5}</span></span>.</p>
+</section>
+<section id="tolerant-spans" class="level2">
+<h2 class="anchored" data-anchor-id="tolerant-spans">Tolerant Spans</h2>
+<p>The bracket text and its attribute block may be split across lines. The filter merges them before numbering, so this renders the same as the one-line form:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">the square of the hypotenuse equals the sum of the squares of the other two sides</span><span class="co">]</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>{.passage #pas-split}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><span id="pas-split" class="passage">the square of the hypotenuse equals the sum of the squares of the other two sides<span class="passage-marker"> {6}</span></span></p>
+<p>Reference it: <a href="#pas-split" class="passage-xref">Passage 6</a>.</p>
 </section>
 <section id="broken-references" class="level2">
 <h2 class="anchored" data-anchor-id="broken-references">Broken References</h2>

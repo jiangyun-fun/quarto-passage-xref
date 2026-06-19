@@ -64,6 +64,21 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 
 [This passage was referenced before it was defined]{.passage #pas-forward-demo}.
 
+## Tolerant Spans
+
+The bracket text and its attribute block may be split across lines. The filter
+merges them before numbering, so this renders the same as the one-line form:
+
+```markdown
+[the square of the hypotenuse equals the sum of the squares of the other two sides]
+{.passage #pas-split}
+```
+
+[the square of the hypotenuse equals the sum of the squares of the other two sides]
+{.passage #pas-split}
+
+Reference it: [Passage]{.pref pas="pas-split"}.
+
 ## Broken References
 
 Unresolved references display a warning:

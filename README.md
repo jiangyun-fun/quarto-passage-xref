@@ -60,6 +60,19 @@ On hover, passage references show a tooltip preview of the target text using the
 
 Passages defined in different files work seamlessly when using Quarto's `{{< include >}}` pattern, since all included content merges into a single Pandoc document before filters run.
 
+### Tolerant syntax
+
+The filter is tolerant of how the bracket text and its attribute block are written. They may sit on a single line, or be split across separate lines — the filter detects the split and merges them into a proper span before numbering. Both forms below produce the same result:
+
+```markdown
+[the square of the hypotenuse equals the sum of the squares of the other two sides]{.passage #pas-pythagoras}
+
+[the square of the hypotenuse equals the sum of the squares of the other two sides]
+{.passage #pas-pythagoras}
+```
+
+This is convenient for long passages that wrap onto their own line, and it also repairs spans that some Markdown formatters break apart. Only spans carrying `.passage` or `.pref` are touched; native Pandoc spans are left alone.
+
 ### Broken references
 
 Unresolved references display a warning: **[?pref:pas-missing-id]**
