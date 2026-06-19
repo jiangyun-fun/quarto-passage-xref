@@ -1,0 +1,22 @@
+{
+  "Passage target": {
+    "prefix": "passage",
+    "body": ["[${1:text}]{.passage #pas-${2:id}}"],
+    "description": "Inline passage cross-reference target (auto-numbered)."
+  },
+  "Passage reference": {
+    "prefix": "pref",
+    "body": ["[${1:Passage}]{.pref pas=\"pas-${2:id}\"}"],
+    "description": "Cross-reference to a passage target."
+  },
+  "Passage reference (custom prefix)": {
+    "prefix": "pref-prefix",
+    "body": ["[${1:Passage}]{.pref pas=\"pas-${2:id}\" prefix=\"${3:Stmt}\"}"],
+    "description": "Cross-reference to a passage target with a custom label prefix."
+  },
+  "Passage reference (number only)": {
+    "prefix": "pref-number",
+    "body": ["[${1:Passage}]{.pref pas=\"pas-${2:id}\" noprefix=\"true\"}"],
+    "description": "Cross-reference to a passage target showing only the number."
+  }
+}

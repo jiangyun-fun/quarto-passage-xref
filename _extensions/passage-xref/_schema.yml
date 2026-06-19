@@ -1,0 +1,28 @@
+# Schema for the passage-xref extension.
+# Consumed by Quarto Wizard (https://m.canouil.dev/quarto-wizard/) for
+# autocompletion, validation, and hover docs on the .passage / .pref syntax.
+$schema: https://m.canouil.dev/quarto-wizard/assets/schema/v1/extension-schema.json
+
+# CSS classes contributed by the filter, used in bracketed spans [text]{.class}.
+classes:
+  passage:
+    description: "Marks an inline span as a cross-reference target. Give the span an id starting with pas- (e.g. #pas-foo); a superscript number is appended automatically."
+  pref:
+    description: "Creates a numbered cross-reference link to a passage target. Point at a passage id with the pas attribute."
+
+# Element attributes accepted on .pref spans.
+attributes:
+  pref:
+    pas:
+      type: string
+      required: true
+      pattern: "^pas-"
+      description: "Id of the target passage, the full pas-... identifier without the leading #."
+    prefix:
+      type: string
+      default: "Passage"
+      description: "Label shown before the reference number."
+    noprefix:
+      type: boolean
+      default: false
+      description: "Show only the reference number, with no label prefix."
